@@ -806,6 +806,21 @@ footer {
     font-size: 0.85rem;
 }
 
+footer .designer {
+    margin-top: 5px;
+    font-weight: 600;
+    color: var(--gray-700);
+}
+
+@media print {
+    footer .designer {
+        display: block !important;
+        color: #64748b;
+        font-size: 8pt;
+        margin-top: 5px;
+    }
+}
+
 /* ============ 功率輸入表格區塊 ============ */
 .power-tables-section {
     background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
@@ -988,6 +1003,41 @@ footer {
         border: none;
         margin: 0;
         padding: 5px 0;
+    }
+    
+    /* PDF 報告標題 */
+    .pdf-header {
+        display: block !important;
+        text-align: center;
+        padding: 10px 0;
+        border-bottom: 2px solid #2563eb;
+        margin-bottom: 10px;
+        page-break-after: avoid;
+    }
+    
+    .pdf-header h1 {
+        font-size: 16pt;
+        color: #1f2937;
+        margin: 0 0 5px;
+    }
+    
+    .pdf-header .subtitle {
+        font-size: 9pt;
+        color: #6b7280;
+        margin: 0;
+    }
+    
+    .pdf-header .meta {
+        font-size: 7pt;
+        color: #9ca3af;
+        margin-top: 5px;
+    }
+    
+    .pdf-header .designer {
+        font-size: 9pt;
+        color: #64748b;
+        margin-top: 8px;
+        font-weight: 500;
     }
     
     /* 區塊標題 */
