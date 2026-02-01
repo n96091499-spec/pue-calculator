@@ -972,6 +972,28 @@ footer .designer {
     .container {
         max-width: 100%;
         padding: 0;
+
+@media print {
+    @page {
+        size: A4;
+        margin: 0.4cm 0.6cm;
+    }
+    
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
+    body {
+        background: white;
+        font-size: 7pt;
+        color: #333;
+        line-height: 1.2;
+    }
+    
+    .container {
+        max-width: 100%;
+        padding: 0;
         margin: 0;
     }
     
@@ -1002,95 +1024,95 @@ footer .designer {
         box-shadow: none;
         border: none;
         margin: 0;
-        padding: 5px 0;
+        padding: 3px 0;
     }
     
     /* PDF 報告標題 */
     .pdf-header {
         display: block !important;
         text-align: center;
-        padding: 10px 0;
+        padding: 8px 0;
         border-bottom: 2px solid #2563eb;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
         page-break-after: avoid;
     }
     
     .pdf-header h1 {
-        font-size: 16pt;
+        font-size: 14pt;
         color: #1f2937;
-        margin: 0 0 5px;
+        margin: 0 0 3px;
     }
     
     .pdf-header .subtitle {
-        font-size: 9pt;
+        font-size: 8pt;
         color: #6b7280;
         margin: 0;
     }
     
     .pdf-header .meta {
-        font-size: 7pt;
+        font-size: 6pt;
         color: #9ca3af;
-        margin-top: 5px;
+        margin-top: 3px;
     }
     
     .pdf-header .designer {
-        font-size: 9pt;
+        font-size: 8pt;
         color: #64748b;
-        margin-top: 8px;
+        margin-top: 5px;
         font-weight: 500;
     }
     
     /* 區塊標題 */
     h2 {
-        font-size: 11pt;
+        font-size: 10pt;
         color: #1f2937;
         border-bottom: 2px solid #3b82f6;
-        padding-bottom: 3px;
-        margin: 8px 0 5px;
+        padding-bottom: 2px;
+        margin: 6px 0 4px;
     }
     
     h3 {
         font-size: 9pt;
         color: #374151;
-        margin: 8px 0 4px;
+        margin: 6px 0 3px;
     }
     
     /* 結果卡片 */
     .result-cards {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 6px;
-        margin: 6px 0;
+        gap: 5px;
+        margin: 5px 0;
     }
     
     .result-card {
         background: #f8fafc;
-        padding: 6px;
+        padding: 5px;
         border-radius: 3px;
         text-align: center;
         border: 1px solid #e2e8f0;
     }
     
     .card-icon {
-        font-size: 14pt;
+        font-size: 12pt;
         display: block;
     }
     
     .card-label {
-        font-size: 7pt;
+        font-size: 6pt;
         color: #64748b;
         display: block;
     }
     
     .card-value {
-        font-size: 14pt;
+        font-size: 12pt;
         font-weight: 700;
         color: #1e293b;
         display: block;
     }
     
     .card-unit {
-        font-size: 7pt;
+        font-size: 6pt;
         color: #64748b;
     }
     
@@ -1105,7 +1127,7 @@ footer .designer {
     
     /* 用電分布圖 */
     .power-distribution {
-        margin: 6px 0;
+        margin: 5px 0;
     }
     
     .chart-bars {
@@ -1115,15 +1137,15 @@ footer .designer {
     .chart-bar {
         display: flex;
         align-items: center;
-        margin-bottom: 3px;
+        margin-bottom: 2px;
         page-break-inside: avoid;
     }
     
     .bar-fill {
-        height: 14px;
+        height: 12px;
         background: #3b82f6;
         border-radius: 2px;
-        margin-right: 6px;
+        margin-right: 5px;
         min-width: 5px;
     }
     
@@ -1133,13 +1155,13 @@ footer .designer {
     #other-bar .bar-fill { background: #8b5cf6; }
     
     .bar-label {
-        width: 55px;
-        font-size: 7pt;
+        width: 50px;
+        font-size: 6pt;
         color: #4b5563;
     }
     
     .bar-value {
-        font-size: 7pt;
+        font-size: 6pt;
         font-weight: 600;
         color: #1f2937;
     }
@@ -1147,22 +1169,22 @@ footer .designer {
     /* 空調分析 */
     .hvac-result {
         background: #f8fafc;
-        padding: 6px;
+        padding: 5px;
         border-radius: 3px;
-        margin: 6px 0;
+        margin: 5px 0;
         border: 1px solid #e2e8f0;
     }
     
     .hvac-cards {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 5px;
-        margin-top: 5px;
+        gap: 4px;
+        margin-top: 4px;
     }
     
     .hvac-card {
         background: white;
-        padding: 5px;
+        padding: 4px;
         border-radius: 2px;
         text-align: center;
         border: 1px solid #e2e8f0;
@@ -1174,36 +1196,36 @@ footer .designer {
     }
     
     .hvac-label {
-        font-size: 6pt;
+        font-size: 5pt;
         color: #64748b;
         display: block;
     }
     
     .hvac-value {
-        font-size: 10pt;
+        font-size: 9pt;
         font-weight: 700;
         color: #1e293b;
         display: block;
     }
     
     .hvac-unit {
-        font-size: 6pt;
+        font-size: 5pt;
         color: #64748b;
     }
     
     /* 表格 */
     .detail-table {
-        margin: 6px 0;
+        margin: 5px 0;
     }
     
     .detail-table table {
         width: 100%;
         border-collapse: collapse;
-        font-size: 7pt;
+        font-size: 6pt;
     }
     
     .detail-table th, .detail-table td {
-        padding: 5px 6px;
+        padding: 4px 5px;
         text-align: left;
         border: 1px solid #cbd5e1;
     }
@@ -1225,7 +1247,7 @@ footer .designer {
     
     /* 建議區塊 */
     .recommendations {
-        margin: 6px 0;
+        margin: 5px 0;
         page-break-inside: avoid;
     }
     
@@ -1236,11 +1258,11 @@ footer .designer {
     .recommendation-item {
         display: flex;
         align-items: flex-start;
-        gap: 6px;
-        padding: 5px 6px;
-        margin-bottom: 3px;
+        gap: 5px;
+        padding: 4px 5px;
+        margin-bottom: 2px;
         background: #f0fdf4;
-        border-left: 3px solid #22c55e;
+        border-left: 2px solid #22c55e;
         border-radius: 0 2px 2px 0;
     }
     
@@ -1265,395 +1287,81 @@ footer .designer {
     
     /* 溫度分布圖表 */
     .temperature-chart {
+        margin: 4px 0;
+        page-break-inside: avoid;
+    }
+    
+    .temp-chart-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1px;
+    }
+    
+    .temp-chart-label {
+        width: 25px;
+        font-size: 6pt;
+        color: #64748b;
+    }
+    
+    .temp-bar-container {
+        flex: 1;
+        height: 8px;
+        background: #f1f5f9;
+        border-radius: 1px;
+    }
+    
+    .temp-bar-fill {
+        height: 100%;
+        background: #22c55e;
+        border-radius: 1px;
+    }
+    
+    .temp-bar-fill.high {
+        background: #ef4444;
+    }
+    
+    .temp-bar-fill.medium {
+        background: #f59e0b;
+    }
+    
+    .temp-chart-value {
+        width: 50px;
+        font-size: 5pt;
+        color: #64748b;
+        text-align: right;
+    }
+    
+    /* 匯總統計 */
+    .summary-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
         margin: 5px 0;
-        page-break-inside: avoid;
-    }
-    
-    .temp-chart-row {
-        display: flex;
-        align-items: center;
-        margin-bottom: 2px;
-    }
-    
-    .temp-chart-label {
-        width: 30px;
-        font-size: 7pt;
-        color: #64748b;
-    }
-    
-    .temp-bar-container {
-        flex: 1;
-        height: 10px;
-        background: #f1f5f9;
-        border-radius: 2px;
-    }
-    
-    .temp-bar-fill {
-        height: 100%;
-        background: #22c55e;
-        border-radius: 2px;
-    }
-    
-    .temp-bar-fill.high {
-        background: #ef4444;
-    }
-    
-    .temp-bar-fill.medium {
-        background: #f59e0b;
-    }
-    
-    .temp-chart-value {
-        width: 55px;
-        font-size: 6pt;
-        color: #64748b;
-        text-align: right;
-    }
-    
-    /* 匯總統計 */
-    .summary-stats {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 6px;
-        margin: 6px 0;
     }
     
     .summary-card {
         background: #f8fafc;
-        padding: 5px;
+        padding: 4px;
         border-radius: 2px;
         text-align: center;
         border: 1px solid #e2e8f0;
     }
     
     .summary-label {
-        font-size: 6pt;
+        font-size: 5pt;
         color: #64748b;
         display: block;
     }
     
     .summary-value {
-        font-size: 11pt;
+        font-size: 10pt;
         font-weight: 700;
         color: #1e293b;
     }
     
     .summary-unit {
-        font-size: 6pt;
+        font-size: 5pt;
         color: #64748b;
-    }
-    
-    /* 避免不當分頁 */
-    table, figure {
-        page-break-inside: avoid;
-    }
-    
-    h2, h3 {
-        page-break-after: avoid;
-    }
-}
-    
-    .detail-table td {
-        color: #475569;
-    }
-    
-    .detail-table tr:last-child td {
-        background: #f1f5f9;
-        font-weight: 600;
-    }
-    
-    /* 建議區塊 */
-    .recommendations {
-        margin: 8px 0;
-        page-break-inside: avoid;
-    }
-    
-    .recommendations-content {
-        display: block;
-    }
-    
-    .recommendation-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 8px;
-        padding: 6px 8px;
-        margin-bottom: 4px;
-        background: #f0fdf4;
-        border-left: 3px solid #22c55e;
-        border-radius: 0 3px 3px 0;
-    }
-    
-    .recommendation-item.warning {
-        background: #fffbeb;
-        border-left-color: #f59e0b;
-    }
-    
-    .recommendation-item.danger {
-        background: #fef2f2;
-        border-left-color: #ef4444;
-    }
-    
-    .recommendation-item.info {
-        background: #eff6ff;
-        border-left-color: #3b82f6;
-    }
-    
-    .recommendation-icon {
-        font-size: 12pt;
-    }
-    
-    /* 溫度分布圖表 */
-    .temperature-chart {
-        margin: 6px 0;
-        page-break-inside: avoid;
-    }
-    
-    .temp-chart-row {
-        display: flex;
-        align-items: center;
-        margin-bottom: 3px;
-    }
-    
-    .temp-chart-label {
-        width: 35px;
-        font-size: 8pt;
-        color: #64748b;
-    }
-    
-    .temp-bar-container {
-        flex: 1;
-        height: 12px;
-        background: #f1f5f9;
-        border-radius: 2px;
-    }
-    
-    .temp-bar-fill {
-        height: 100%;
-        background: #22c55e;
-        border-radius: 2px;
-    }
-    
-    .temp-bar-fill.high {
-        background: #ef4444;
-    }
-    
-    .temp-bar-fill.medium {
-        background: #f59e0b;
-    }
-    
-    .temp-chart-value {
-        width: 60px;
-        font-size: 7pt;
-        color: #64748b;
-        text-align: right;
-    }
-    
-    /* 匯總統計 */
-    .summary-stats {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
-        margin: 8px 0;
-    }
-    
-    .summary-card {
-        background: #f8fafc;
-        padding: 6px;
-        border-radius: 3px;
-        text-align: center;
-        border: 1px solid #e2e8f0;
-    }
-    
-    .summary-label {
-        font-size: 7pt;
-        color: #64748b;
-        display: block;
-    }
-    
-    .summary-value {
-        font-size: 12pt;
-        font-weight: 700;
-        color: #1e293b;
-    }
-    
-    .summary-unit {
-        font-size: 7pt;
-        color: #64748b;
-    }
-    
-    /* 避免不當分頁 */
-    table, figure {
-        page-break-inside: avoid;
-    }
-    
-    h2, h3 {
-        page-break-after: avoid;
-    }
-}
-        font-weight: 700;
-        color: #1e293b;
-        display: block;
-        margin-top: 3px;
-    }
-    
-    .hvac-unit {
-        font-size: 8pt;
-        color: #64748b;
-    }
-    
-    /* 表格 */
-    .detail-table {
-        margin: 15px 0;
-    }
-    
-    .detail-table table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 9pt;
-    }
-    
-    .detail-table th, .detail-table td {
-        padding: 8px 10px;
-        text-align: left;
-        border: 1px solid #cbd5e1;
-    }
-    
-    .detail-table th {
-        background: #f1f5f9;
-        font-weight: 600;
-        color: #334155;
-    }
-    
-    .detail-table td {
-        color: #475569;
-    }
-    
-    .detail-table tr:last-child td {
-        background: #f1f5f9;
-        font-weight: 600;
-    }
-    
-    /* 建議區塊 */
-    .recommendations {
-        margin: 15px 0;
-        page-break-inside: avoid;
-    }
-    
-    .recommendations-content {
-        display: block;
-    }
-    
-    .recommendation-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
-        padding: 10px;
-        margin-bottom: 8px;
-        background: #f0fdf4;
-        border-left: 4px solid #22c55e;
-        border-radius: 0 4px 4px 0;
-    }
-    
-    .recommendation-item.warning {
-        background: #fffbeb;
-        border-left-color: #f59e0b;
-    }
-    
-    .recommendation-item.danger {
-        background: #fef2f2;
-        border-left-color: #ef4444;
-    }
-    
-    .recommendation-item.info {
-        background: #eff6ff;
-        border-left-color: #3b82f6;
-    }
-    
-    .recommendation-icon {
-        font-size: 14pt;
-    }
-    
-    /* 溫度分布圖表 */
-    .temperature-chart {
-        margin: 10px 0;
-        page-break-inside: avoid;
-    }
-    
-    .temp-chart-row {
-        display: flex;
-        align-items: center;
-        margin-bottom: 4px;
-    }
-    
-    .temp-chart-label {
-        width: 40px;
-        font-size: 9pt;
-        color: #64748b;
-    }
-    
-    .temp-bar-container {
-        flex: 1;
-        height: 14px;
-        background: #f1f5f9;
-        border-radius: 2px;
-    }
-    
-    .temp-bar-fill {
-        height: 100%;
-        background: #22c55e;
-        border-radius: 2px;
-    }
-    
-    .temp-bar-fill.high {
-        background: #ef4444;
-    }
-    
-    .temp-bar-fill.medium {
-        background: #f59e0b;
-    }
-    
-    .temp-chart-value {
-        width: 70px;
-        font-size: 8pt;
-        color: #64748b;
-        text-align: right;
-    }
-    
-    /* 匯總統計 */
-    .summary-stats {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-        margin: 10px 0;
-    }
-    
-    .summary-card {
-        background: #f8fafc;
-        padding: 10px;
-        border-radius: 4px;
-        text-align: center;
-        border: 1px solid #e2e8f0;
-    }
-    
-    .summary-label {
-        font-size: 8pt;
-        color: #64748b;
-        display: block;
-    }
-    
-    .summary-value {
-        font-size: 14pt;
-        font-weight: 700;
-        color: #1e293b;
-    }
-    
-    .summary-unit {
-        font-size: 8pt;
-        color: #64748b;
-    }
-    
-    /* 分頁控制 */
-    .page-break {
-        page-break-before: always;
     }
     
     /* 避免不當分頁 */
