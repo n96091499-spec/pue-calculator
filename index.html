@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>資料中心 PUE 計算器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏢 資料中心 PUE 計算器</h1>
+            <p class="subtitle">Power Usage Effectiveness 能源使用效率計算</p>
+        </header>
+
+        <!-- 系統類型選擇 -->
+        <section class="system-section">
+            <h2>🔧 選擇冷卻系統類型</h2>
+            <div class="system-selector">
+                <button type="button" class="system-btn active" data-system="water" onclick="selectSystem('water')">
+                    💧 水冷冰機<br><span class="btn-subtitle">(濕球溫度)</span>
+                </button>
+                <button type="button" class="system-btn" data-system="air" onclick="selectSystem('air')">
+                    🌬️ 風冷冰機<br><span class="btn-subtitle">(乾球溫度)</span>
+                </button>
+            </div>
+            <div id="system-description" class="system-description">
+                <p>選擇水冷系統 - 使用 <strong>濕球溫度</strong> 進行計算</p>
+            </div>
+        </section>
+
+        <!-- 地區選擇 -->
+        <section id="region-section" class="region-section hidden">
+            <h2>📍 選擇資料中心所在地區</h2>
+            <div class="region-selector">
+                <button type="button" class="region-btn active" data-region="taoyuan" onclick="selectRegion('taoyuan')">
+                    🌆 桃園
+                </button>
+                <button type="button" class="region-btn" data-region="taichung" onclick="selectRegion('taichung')">
+                    🏛️ 台中
+                </button>
+                <button type="button" class="region-btn" data-region="kaohsiung" onclick="selectRegion('kaohsiung')">
+                    🏙️ 高雄
+                </button>
+            </div>
+        </section>
+
+        <!-- 乾球溫度時數統計 -->
+        <section id="stats-section" class="stats-section hidden">
+            <h2>📊 <span id="region-title">桃園</span> <span id="temp-type">乾球</span>溫度時數分布</h2>
+            
+            <!-- 分布圖 -->
+            <div class="temperature-chart">
+                <div id="temp-chart" class="temp-chart-container">
+                </div>
+            </div>
+
+            <!-- 匯總統計 -->
+            <div class="summary-stats">
+                <div class="summary-card">
+                    <span class="summary-label">總時數</span>
+                    <span id="total-hours" class="summary-value">0</span>
+                    <span class="summary-unit">小時/年</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 濕球溫度時數統計 (風冷系統專用) -->
+        <section id="wet-stats-section" class="stats-section hidden">
+            <h2>💧 <span id="wet-region-title">桃園</span> <span id="wet-temp-type">濕球</span>溫度時數分布</h2>
+            
+            <!-- 分布圖 -->
+            <div class="temperature-chart">
+                <div id="wet-temp-chart" class="temp-chart-container">
+                </div>
+            </div>
+
+            <!-- 匯總統計 -->
+            <div class="summary-stats">
+                <div class="summary-card">
+                    <span class="summary-label">總時數</span>
+                    <span id="wet-total-hours" class="summary-value">0</span>
+                    <span class="summary-unit">小時/年</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 冷水機組與冷卻水塔功率輸入表格 -->
+        <section id="power-tables-section" class="power-tables-section hidden">
+            <h2>⚡ 輸入各溫度耗電量 (kW)</h2>
+            <p class="tip-text">💡 提示：輸入 1 個或多個溫度點的耗電量，點擊「自動生成其他」用線性外推填滿所有格子</p>
+            <div id="power-input-tables" class="power-tables-container">
+            </div>
+        </section>
+
+        <!-- PUE 說明 -->
+        <section class="info-card">
+            <h2>📖 PUE 是什麼？</h2>
+            <div class="pue-formula">
+                <div class="formula-box">
+                    <span class="formula-title">PUE 計算公式</span>
+                    <div class="formula">
+                        PUE = <span class="highlight">總設施用電 (kW)</span> / <span class="highlight">IT 設備用電 (kW)</span>
+                    </div>
+                </div>
+                <div class="pue-levels">
+                    <div class="pue-level excellent">✅ PUE ≤ 1.4 <span>高效節能</span></div>
+                    <div class="pue-level good">👍 PUE 1.4-1.6 <span>良好</span></div>
+                    <div class="pue-level average">⚠️ PUE 1.6-2.0 <span>一般</span></div>
+                    <div class="pue-level poor">❌ PUE > 2.0 <span>待改進</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 計算輸入區 -->
+        <section class="calculator-section">
+            <h2>🔢 輸入用電數據 (kW)</h2>
+            <p class="tip-text">💡 提示：先輸入「IT 設備用電」後，點擊各項目的 💡 按鈕可自動填入經驗建議值</p>
+            
+            <form id="pue-form">
+                <!-- IT 設備用電 -->
+                <div class="input-group main-power">
+                    <div class="group-header">
+                        <span class="icon">💻</span>
+                        <label>IT 設備用電 (必須輸入)</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="number" id="it-power" placeholder="0" step="0.1" required>
+                        <span class="unit">kW</span>
+                    </div>
+                </div>
+
+                <!-- 電力設施用電 -->
+                <div class="input-group">
+                    <div class="group-header">
+                        <span class="icon">⚡</span>
+                        <label>電力設施用電</label>
+                        <button type="button" class="auto-fill-btn-large" onclick="autoFillCategory('power')">自動生成建議</button>
+                        <button type="button" class="toggle-btn" onclick="toggleDetails('power-details')">展開 ▼</button>
+                    </div>
+                    <div id="power-details" class="details-section collapsed">
+                        <div class="input-row">
+                            <label>配電系統損耗 (1-3%)</label>
+                            <input type="number" id="distribution-loss" placeholder="0" step="0.1" value="0">
+                            <span class="unit">kW</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('distribution-loss', 'power')" title="建議值">💡</button>
+                        </div>
+                        <div class="input-row">
+                            <label>變壓器損耗 (0.5-1.5%)</label>
+                            <input type="number" id="transformer-loss" placeholder="0" step="0.1" value="0">
+                            <span class="unit">kW</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('transformer-loss', 'power')" title="建議值">💡</button>
+                        </div>
+                        <div class="input-row">
+                            <label>發電機用電 (0.5-1%)</label>
+                            <input type="number" id="generator-power" placeholder="0" step="0.1" value="0">
+                            <span class="unit">kW</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('generator-power', 'power')" title="建議值">💡</button>
+                        </div>
+                        <div class="input-row">
+                            <label>其他電力設施 (0.5-1%)</label>
+                            <input type="number" id="other-power" placeholder="0" step="0.1" value="0">
+                            <span class="unit">kW</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('other-power', 'power')" title="建議值">💡</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 空調與冷卻用電 (不含冷水機組和冷卻水塔) -->
+                <div class="input-group">
+                    <div class="group-header">
+                        <span class="icon">❄️</span>
+                        <label>其他空調與冷卻用電</label>
+                        <button type="button" class="auto-fill-btn-large" onclick="autoFillCategory('cooling')">自動生成建議</button>
+                        <button type="button" class="toggle-btn" onclick="toggleDetails('cooling-details')">展開 ▼</button>
+                    </div>
+                    <div id="cooling-details" class="details-section collapsed">
+                        <div class="input-row">
+                            <label>CDU 冷卻分配單元 (1-3%)</label>
+                            <input type="number" id="cdu-power" placeholder="0" step="0.1" value="0">
+                            <span class="unit">kW</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('cdu-power', 'cooling')" title="建議值">💡</button>
+                        </div>
+                        <div class="input-row">
+                            <label>CRAH/CRAC/FWU 機組 (3-8%)</label>
+                            <input type="number" id="crac-power" placeholder="0" step="0.1" value="0">
+                            <span class="unit">kW</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('crac-power', 'cooling')" title="建議值">💡</button>
+                        </div>
+                        <div class="input-row">
+                            <label>幫浦與風扇 (2-5%)</label>
+                            <input type="number" id="pump-fan-power" placeholder="0" step="0.1" value="0">
+                            <span class="unit">kW</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('pump-fan-power', 'cooling')" title="建議值">💡</button>
+                        </div>
+                        <div class="input-row">
+                            <label>其他冷卻設備 (1-2%)</label>
+                            <input type="number" id="other-cooling" placeholder="0" step="0.1" value="0">
+                            <span class="unit">kW</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('other-cooling', 'cooling')" title="建議值">💡</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 其他用電 -->
+                <div class="input-group">
+                    <div class="group-header">
+                        <span class="icon">💡</span>
+                        <label>其他用電</label>
+                        <button type="button" class="auto-fill-btn-large" onclick="autoFillCategory('other')">自動生成建議</button>
+                        <button type="button" class="toggle-btn" onclick="toggleDetails('other-details')">展開 ▼</button>
+                    </div>
+                    <div id="other-details" class="details-section collapsed">
+                        <div class="input-row">
+                            <label>照明用電 (0.5-1%)</label>
+                            <input type="number" id="lighting-power" placeholder="0" step="0.1" value="0">
+                            <span class="unit">kW</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('lighting-power', 'other')" title="建議值">💡</button>
+                        </div>
+                        <div class="input-row">
+                            <label>消防系統 (0.2-0.5%)</label>
+                            <input type="number" id="fire-system-power" placeholder="0" step="0.1" value="0">
+                            <span class="unit">kW</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('fire-system-power', 'other')" title="建議值">💡</button>
+                        </div>
+                        <div class="input-row">
+                            <label>保全系統 (0.1-0.3%)</label>
+                            <input type="number" id="security-power" placeholder="0" step="0.1" value="0">
+                            <span class="unit">kW</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('security-power', 'other')" title="建議值">💡</button>
+                        </div>
+                        <div class="input-row">
+                            <label>辦公室用電 (1-3%)</label>
+                            <input type="number" id="office-power" placeholder="0" step="0.1" value="0">
+                            <span class="unit">kW</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('office-power', 'other')" title="建議值">💡</button>
+                        </div>
+                        <div class="input-row">
+                            <label>其他雜項用電 (0.5-1%)</label>
+                            <input type="number" id="misc-power" placeholder="0" step="0.1" value="0">
+                            <span class="unit">kW</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('misc-power', 'other')" title="建議值">💡</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 計算按鈕 -->
+                <div class="action-buttons">
+                    <button type="button" class="btn-calc" onclick="calculatePUE()">計算 PUE</button>
+                    <button type="button" class="btn-pdf" onclick="generatePDFReport()">📄 產生 PDF 報告</button>
+                    <button type="button" class="btn-reset" onclick="resetForm()">重置</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- 計算結果 -->
+        <section id="result-section" class="result-section hidden" data-date="">
+            <!-- PDF 列印專用標題 -->
+            <div class="pdf-header">
+                <h1>🏢 資料中心 PUE 計算報告</h1>
+                <p class="subtitle">Power Usage Effectiveness Report</p>
+                <p class="meta" id="report-meta"></p>
+            </div>
+            <h2>📊 計算結果</h2>
+            
+            <div class="result-cards">
+                <!-- PUE 結果 -->
+                <div class="result-card pue-result">
+                    <div class="card-icon">🎯</div>
+                    <div class="card-content">
+                        <span class="card-label">PUE 值</span>
+                        <span id="pue-value" class="card-value">-</span>
+                    </div>
+                    <div id="pue-indicator" class="pue-indicator"></div>
+                </div>
+
+                <!-- 總設施用電 -->
+                <div class="result-card">
+                    <div class="card-icon">🏭</div>
+                    <div class="card-content">
+                        <span class="card-label">總設施用電</span>
+                        <span id="total-facility-power" class="card-value">-</span>
+                        <span class="card-unit">kW</span>
+                    </div>
+                </div>
+
+                <!-- IT 設備用電 -->
+                <div class="result-card">
+                    <div class="card-icon">💻</div>
+                    <div class="card-content">
+                        <span class="card-label">IT 設備用電</span>
+                        <span id="total-it-power" class="card-value">-</span>
+                        <span class="card-unit">kW</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 用電分布圖 -->
+            <div class="power-distribution">
+                <h3>📈 用電分布</h3>
+                <div id="distribution-chart" class="chart-container">
+                    <div class="chart-bars">
+                        <div class="chart-bar" id="it-bar">
+                            <div class="bar-fill"></div>
+                            <div class="bar-label">IT 設備</div>
+                            <div class="bar-value">-</div>
+                        </div>
+                        <div class="chart-bar" id="cooling-bar">
+                            <div class="bar-fill"></div>
+                            <div class="bar-label">空調冷卻</div>
+                            <div class="bar-value">-</div>
+                        </div>
+                        <div class="chart-bar" id="power-bar">
+                            <div class="bar-fill"></div>
+                            <div class="bar-label">電力設施</div>
+                            <div class="bar-value">-</div>
+                        </div>
+                        <div class="chart-bar" id="other-bar">
+                            <div class="bar-fill"></div>
+                            <div class="bar-label">其他</div>
+                            <div class="bar-value">-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 空調系統分析 -->
+            <div class="hvac-result">
+                <h3>❄️ 空調系統年度分析</h3>
+                <div class="hvac-cards">
+                    <div class="hvac-card">
+                        <span class="hvac-label">冷水機組 (加權平均)</span>
+                        <span id="chiller-result" class="hvac-value">-</span>
+                        <span class="hvac-unit">kW</span>
+                    </div>
+                    <div class="hvac-card">
+                        <span class="hvac-label">冷卻水塔 (加權平均)</span>
+                        <span id="tower-result" class="hvac-value">-</span>
+                        <span class="hvac-unit">kW</span>
+                    </div>
+                    <div class="hvac-card">
+                        <span class="hvac-label">加權 CLF</span>
+                        <span id="clf-result" class="hvac-value">-</span>
+                    </div>
+                    <div class="hvac-card highlight">
+                        <span class="hvac-label">年度節能潛力</span>
+                        <span id="energy-savings-result" class="hvac-value">-</span>
+                        <span class="hvac-unit">kWh/年</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 詳細表格 -->
+            <div class="detail-table">
+                <h3>📋 詳細明細</h3>
+                <table id="detail-table">
+                    <thead>
+                        <tr>
+                            <th>項目</th>
+                            <th>用電量 (kW)</th>
+                            <th>佔比</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detail-tbody">
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 建議 -->
+            <div class="recommendations">
+                <h3>💡 節能建議</h3>
+                <div id="recommendations-content" class="recommendations-content">
+                </div>
+            </div>
+        </section>
+
+        <!-- 參考資料 -->
+        <section class="reference-section">
+            <h2>📚 資料中心節能參考</h2>
+            <div class="reference-cards">
+                <div class="ref-card">
+                    <div class="ref-title">🌡️ 氣候影響</div>
+                    <p>不同地區的乾球/濕球溫度會顯著影響冷卻系統效率，進而影響 PUE 值。</p>
+                </div>
+                <div class="ref-card">
+                    <div class="ref-title">💧 水冷優勢</div>
+                    <p>水冷系統在低濕球溫度地區可達到更佳的節能效果。</p>
+                </div>
+                <div class="ref-card">
+                    <div class="ref-title">🎯 節能目標</div>
+                    <p>透過免費冷卻和優化控制，可將 PUE 控制在 1.4 以下。</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>🏢 資料中心 PUE 計算器 | Energy Efficiency Calculator</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

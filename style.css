@@ -1,0 +1,1479 @@
+/* ============ 基礎樣式 ============ */
+:root {
+    --primary: #2563eb;
+    --primary-light: #3b82f6;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+    --radius: 12px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+    min-height: 100vh;
+    color: var(--gray-800);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ============ Header ============ */
+header {
+    text-align: center;
+    padding: 30px 20px;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    color: var(--gray-800);
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: var(--gray-500);
+    font-size: 0.95rem;
+}
+
+/* ============ 卡片樣式 ============ */
+section {
+    background: white;
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+}
+
+section h2 {
+    font-size: 1.2rem;
+    color: var(--gray-800);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* ============ 系統類型選擇 ============ */
+.system-section {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+}
+
+.system-section h2 {
+    color: #1e40af;
+}
+
+.system-selector {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.system-btn {
+    flex: 1;
+    padding: 20px 24px;
+    border: 3px solid var(--gray-200);
+    border-radius: 12px;
+    background: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.system-btn:hover {
+    border-color: var(--primary-light);
+    background: #f0f7ff;
+}
+
+.system-btn.active {
+    border-color: var(--primary);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.system-btn .btn-subtitle {
+    font-size: 0.85rem;
+    font-weight: 400;
+    opacity: 0.8;
+}
+
+.system-description {
+    background: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: var(--gray-600);
+}
+
+/* ============ 地區選擇 ============ */
+.region-section {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+}
+
+.region-section h2 {
+    color: #166534;
+}
+
+.region-selector {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.region-btn {
+    flex: 1;
+    padding: 14px 20px;
+    border: 2px solid var(--gray-200);
+    border-radius: 10px;
+    background: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.region-btn:hover {
+    border-color: #22c55e;
+    background: #f0fdf4;
+}
+
+.region-btn.active {
+    border-color: #22c55e;
+    background: #22c55e;
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+/* ============ 統計區塊 ============ */
+.stats-section {
+    background: white;
+}
+
+.stats-section h2 {
+    color: var(--gray-800);
+}
+
+/* 分布圖 */
+.temperature-chart {
+    margin-bottom: 20px;
+}
+
+.temp-chart-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.temp-chart-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.temp-chart-label {
+    width: 60px;
+    font-size: 0.85rem;
+    color: var(--gray-700);
+    text-align: right;
+}
+
+.temp-bar-container {
+    flex: 1;
+    height: 20px;
+    background: var(--gray-100);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.temp-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.temp-bar-fill.high { background: #ef4444; }
+.temp-bar-fill.medium { background: #f59e0b; }
+.temp-bar-fill.low { background: #22c55e; }
+
+.temp-chart-value {
+    width: 100px;
+    text-align: right;
+    font-size: 0.85rem;
+    color: var(--gray-600);
+}
+
+/* 匯總統計 */
+.summary-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.summary-card {
+    background: var(--gray-50);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+}
+
+.summary-card.highlight {
+    background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+    border: 2px solid #22c55e;
+}
+
+.summary-label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--gray-500);
+    margin-bottom: 8px;
+}
+
+.summary-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gray-800);
+}
+
+.summary-unit {
+    font-size: 0.8rem;
+    color: var(--gray-500);
+    margin-left: 4px;
+}
+
+/* ============ PUE 說明區 ============ */
+.pue-formula {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formula-box {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.formula-title {
+    font-size: 0.85rem;
+    color: var(--gray-600);
+    margin-bottom: 10px;
+    display: block;
+}
+
+.formula {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--gray-800);
+}
+
+.formula .highlight {
+    color: var(--primary);
+    background: #dbeafe;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.pue-levels {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.pue-level {
+    padding: 12px 8px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.pue-level.excellent { background: #d1fae5; color: #065f46; }
+.pue-level.good { background: #dbeafe; color: #1e40af; }
+.pue-level.average { background: #fef3c7; color: #92400e; }
+.pue-level.poor { background: #fee2e2; color: #991b1b; }
+
+.pue-level span {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 400;
+    margin-top: 4px;
+}
+
+@media (max-width: 640px) {
+    .pue-levels { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ============ 輸入區 ============ */
+.input-group {
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    overflow: hidden;
+}
+
+.input-group.main-power {
+    border-color: var(--primary);
+    border-width: 2px;
+}
+
+.group-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    background: var(--gray-50);
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.group-header .icon {
+    font-size: 1.3rem;
+}
+
+.group-header label {
+    flex: 1;
+    font-weight: 600;
+    color: var(--gray-700);
+}
+
+.toggle-btn {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.toggle-btn:hover {
+    background: var(--gray-200);
+}
+
+.details-section {
+    padding: 16px;
+}
+
+.details-section.collapsed {
+    display: none;
+}
+
+.input-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.input-row:last-child {
+    border-bottom: none;
+}
+
+.input-row label {
+    flex: 1;
+    color: var(--gray-600);
+    font-size: 0.9rem;
+}
+
+.input-row input {
+    width: 120px;
+    padding: 10px 12px;
+    border: 1px solid var(--gray-300);
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: right;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-row input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* ============ 建議按鈕 ============ */
+.suggest-btn {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: all 0.2s;
+    opacity: 0.6;
+}
+
+.suggest-btn:hover {
+    opacity: 1;
+    background: #fef3c7;
+    transform: scale(1.1);
+}
+
+.input-field {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+}
+
+.input-field input {
+    flex: 1;
+    padding: 14px 16px;
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: right;
+}
+
+.input-field input:focus {
+    outline: none;
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+}
+
+.input-field .unit {
+    margin-left: 12px;
+    font-weight: 600;
+    color: var(--gray-600);
+}
+
+/* ============ 提示文字 ============ */
+.tip-text {
+    background: #fef3c7;
+    color: #92400e;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+}
+
+/* ============ 按鈕 ============ */
+.action-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.btn-calc, .btn-reset, .btn-pdf {
+    flex: 1;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-calc {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+}
+
+.btn-calc:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-pdf {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    color: white;
+}
+
+.btn-pdf:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+}
+
+.btn-reset {
+    background: var(--gray-100);
+    color: var(--gray-600);
+}
+
+.btn-reset:hover {
+    background: var(--gray-200);
+}
+
+/* ============ 結果區 ============ */
+.result-section {
+    display: none;
+}
+
+.result-section.show {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.result-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.result-card {
+    background: var(--gray-50);
+    border-radius: 10px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.result-card.pue-result {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+}
+
+.card-icon {
+    font-size: 2rem;
+}
+
+.card-content {
+    flex: 1;
+}
+
+.card-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--gray-500);
+    margin-bottom: 4px;
+}
+
+.card-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gray-800);
+}
+
+.card-unit {
+    font-size: 0.9rem;
+    color: var(--gray-500);
+    margin-left: 4px;
+}
+
+.pue-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--gray-300);
+}
+
+.pue-indicator.excellent { background: var(--success); }
+.pue-indicator.good { background: var(--primary); }
+.pue-indicator.average { background: var(--warning); }
+.pue-indicator.poor { background: var(--danger); }
+
+/* ============ 用電分布圖 ============ */
+.power-distribution {
+    margin-bottom: 24px;
+}
+
+.chart-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.chart-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.bar-fill {
+    height: 28px;
+    border-radius: 6px;
+    background: var(--primary);
+    transition: width 0.5s ease;
+    min-width: 20px;
+}
+
+#it-bar .bar-fill { background: #3b82f6; }
+#cooling-bar .bar-fill { background: #10b981; }
+#power-bar .bar-fill { background: #f59e0b; }
+#other-bar .bar-fill { background: #8b5cf6; }
+
+.bar-label {
+    width: 80px;
+    font-size: 0.85rem;
+    color: var(--gray-600);
+}
+
+.bar-value {
+    width: 100px;
+    text-align: right;
+    font-weight: 600;
+    color: var(--gray-700);
+}
+
+/* 空調系統結果 */
+.hvac-result {
+    margin-bottom: 24px;
+    padding: 20px;
+    background: var(--gray-50);
+    border-radius: 10px;
+}
+
+.hvac-result h3 {
+    font-size: 1rem;
+    color: var(--gray-700);
+    margin-bottom: 16px;
+}
+
+.hvac-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.hvac-card {
+    background: white;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+}
+
+.hvac-card.highlight {
+    background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+    border: 2px solid #22c55e;
+}
+
+.hvac-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--gray-500);
+    margin-bottom: 6px;
+}
+
+.hvac-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--gray-800);
+}
+
+.hvac-unit {
+    font-size: 0.75rem;
+    color: var(--gray-500);
+}
+
+@media (max-width: 640px) {
+    .result-cards, .summary-stats, .hvac-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .system-selector, .region-selector {
+        flex-direction: column;
+    }
+}
+
+/* ============ 表格 ============ */
+.detail-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.detail-table th, .detail-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.detail-table th {
+    background: var(--gray-50);
+    font-weight: 600;
+    color: var(--gray-600);
+    font-size: 0.85rem;
+}
+
+.detail-table td {
+    color: var(--gray-700);
+}
+
+.detail-table tr:last-child td {
+    border-bottom: none;
+    font-weight: 600;
+    background: var(--gray-50);
+}
+
+.negative-value {
+    color: #16a34a;
+    font-weight: 600;
+}
+
+/* ============ 建議 ============ */
+.recommendations-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.recommendation-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+    background: var(--gray-50);
+    border-radius: 8px;
+    border-left: 4px solid var(--success);
+}
+
+.recommendation-item.warning {
+    border-left-color: var(--warning);
+}
+
+.recommendation-item.danger {
+    border-left-color: var(--danger);
+}
+
+.recommendation-icon {
+    font-size: 1.2rem;
+}
+
+/* ============ 參考區 ============ */
+.reference-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.ref-card {
+    padding: 16px;
+    background: var(--gray-50);
+    border-radius: 10px;
+}
+
+.ref-title {
+    font-weight: 600;
+    color: var(--gray-800);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.ref-card p {
+    font-size: 0.85rem;
+    color: var(--gray-600);
+    line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+    .reference-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============ Footer ============ */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--gray-500);
+    font-size: 0.85rem;
+}
+
+/* ============ 功率輸入表格區塊 ============ */
+.power-tables-section {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+}
+
+.power-tables-section h2 {
+    color: #92400e;
+}
+
+.power-tables-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.power-table-section {
+    background: white;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: var(--shadow);
+}
+
+.power-table-section h3 {
+    font-size: 1rem;
+    color: var(--gray-700);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.power-table-scroll {
+    overflow-x: auto;
+    margin-bottom: 12px;
+}
+
+.power-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.power-table th, .power-table td {
+    padding: 10px 12px;
+    text-align: center;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.power-table th {
+    background: var(--gray-50);
+    font-weight: 600;
+    color: var(--gray-600);
+}
+
+.power-table td:first-child {
+    text-align: left;
+    font-weight: 600;
+    color: var(--gray-700);
+}
+
+.power-table td:nth-child(2) {
+    color: var(--gray-500);
+}
+
+.power-input {
+    width: 100px;
+    padding: 8px 10px;
+    border: 1px solid var(--gray-300);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    text-align: right;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.power-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.power-input:hover {
+    border-color: var(--primary-light);
+}
+
+.auto-fill-btn-large {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.auto-fill-btn-large:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(34, 197, 94, 0.3);
+}
+
+.table-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid var(--gray-200);
+    font-size: 0.9rem;
+    color: var(--gray-600);
+}
+
+.table-summary strong {
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+@media (max-width: 640px) {
+    .power-table {
+        font-size: 0.8rem;
+    }
+    
+    .power-input {
+        width: 80px;
+        padding: 6px 8px;
+        font-size: 0.85rem;
+    }
+}
+
+/* ============ 列印樣式 (PDF) ============ */
+
+@media print {
+    @page {
+        size: A4;
+        margin: 0.8cm;
+    }
+    
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
+    body {
+        background: white;
+        font-size: 9pt;
+        color: #333;
+        line-height: 1.3;
+    }
+    
+    .container {
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+    
+    /* 隱藏不需要列印的元素 */
+    .action-buttons,
+    .btn-reset,
+    .toggle-btn,
+    .suggest-btn,
+    .auto-fill-btn-large,
+    .tip-text,
+    .info-card,
+    .reference-section,
+    footer,
+    .system-section,
+    .region-section,
+    .power-tables-section,
+    .calculator-section,
+    .system-description,
+    .report-header {
+        display: none !important;
+    }
+    
+    /* 顯示的區塊 */
+    .stats-section,
+    .result-section {
+        display: block !important;
+        page-break-inside: avoid;
+        box-shadow: none;
+        border: none;
+        margin: 0;
+        padding: 8px 0;
+    }
+    
+    /* 區塊標題 */
+    h2 {
+        font-size: 12pt;
+        color: #1f2937;
+        border-bottom: 2px solid #3b82f6;
+        padding-bottom: 4px;
+        margin: 12px 0 8px;
+    }
+    
+    h3 {
+        font-size: 10pt;
+        color: #374151;
+        margin: 10px 0 6px;
+    }
+    
+    /* 結果卡片 */
+    .result-cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin: 8px 0;
+    }
+    
+    .result-card {
+        background: #f8fafc;
+        padding: 8px;
+        border-radius: 4px;
+        text-align: center;
+        border: 1px solid #e2e8f0;
+    }
+    
+    .card-icon {
+        font-size: 16pt;
+        display: block;
+    }
+    
+    .card-label {
+        font-size: 8pt;
+        color: #64748b;
+        display: block;
+    }
+    
+    .card-value {
+        font-size: 16pt;
+        font-weight: 700;
+        color: #1e293b;
+        display: block;
+    }
+    
+    .card-unit {
+        font-size: 8pt;
+        color: #64748b;
+    }
+    
+    .pue-result {
+        background: #eff6ff !important;
+        border-color: #3b82f6 !important;
+    }
+    
+    .pue-indicator {
+        display: none;
+    }
+    
+    /* 用電分布圖 */
+    .power-distribution {
+        margin: 8px 0;
+    }
+    
+    .chart-bars {
+        display: block;
+    }
+    
+    .chart-bar {
+        display: flex;
+        align-items: center;
+        margin-bottom: 4px;
+        page-break-inside: avoid;
+    }
+    
+    .bar-fill {
+        height: 16px;
+        background: #3b82f6;
+        border-radius: 2px;
+        margin-right: 8px;
+        min-width: 5px;
+    }
+    
+    #it-bar .bar-fill { background: #3b82f6; }
+    #cooling-bar .bar-fill { background: #10b981; }
+    #power-bar .bar-fill { background: #f59e0b; }
+    #other-bar .bar-fill { background: #8b5cf6; }
+    
+    .bar-label {
+        width: 60px;
+        font-size: 8pt;
+        color: #4b5563;
+    }
+    
+    .bar-value {
+        font-size: 8pt;
+        font-weight: 600;
+        color: #1f2937;
+    }
+    
+    /* 空調分析 */
+    .hvac-result {
+        background: #f8fafc;
+        padding: 8px;
+        border-radius: 4px;
+        margin: 8px 0;
+        border: 1px solid #e2e8f0;
+    }
+    
+    .hvac-cards {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+        margin-top: 6px;
+    }
+    
+    .hvac-card {
+        background: white;
+        padding: 6px;
+        border-radius: 3px;
+        text-align: center;
+        border: 1px solid #e2e8f0;
+    }
+    
+    .hvac-card.highlight {
+        background: #dcfce7 !important;
+        border-color: #22c55e !important;
+    }
+    
+    .hvac-label {
+        font-size: 7pt;
+        color: #64748b;
+        display: block;
+    }
+    
+    .hvac-value {
+        font-size: 11pt;
+        font-weight: 700;
+        color: #1e293b;
+        display: block;
+    }
+    
+    .hvac-unit {
+        font-size: 7pt;
+        color: #64748b;
+    }
+    
+    /* 表格 */
+    .detail-table {
+        margin: 8px 0;
+    }
+    
+    .detail-table table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 8pt;
+    }
+    
+    .detail-table th, .detail-table td {
+        padding: 6px 8px;
+        text-align: left;
+        border: 1px solid #cbd5e1;
+    }
+    
+    .detail-table th {
+        background: #f1f5f9;
+        font-weight: 600;
+        color: #334155;
+    }
+    
+    .detail-table td {
+        color: #475569;
+    }
+    
+    .detail-table tr:last-child td {
+        background: #f1f5f9;
+        font-weight: 600;
+    }
+    
+    /* 建議區塊 */
+    .recommendations {
+        margin: 8px 0;
+        page-break-inside: avoid;
+    }
+    
+    .recommendations-content {
+        display: block;
+    }
+    
+    .recommendation-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 6px 8px;
+        margin-bottom: 4px;
+        background: #f0fdf4;
+        border-left: 3px solid #22c55e;
+        border-radius: 0 3px 3px 0;
+    }
+    
+    .recommendation-item.warning {
+        background: #fffbeb;
+        border-left-color: #f59e0b;
+    }
+    
+    .recommendation-item.danger {
+        background: #fef2f2;
+        border-left-color: #ef4444;
+    }
+    
+    .recommendation-item.info {
+        background: #eff6ff;
+        border-left-color: #3b82f6;
+    }
+    
+    .recommendation-icon {
+        font-size: 12pt;
+    }
+    
+    /* 溫度分布圖表 */
+    .temperature-chart {
+        margin: 6px 0;
+        page-break-inside: avoid;
+    }
+    
+    .temp-chart-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 3px;
+    }
+    
+    .temp-chart-label {
+        width: 35px;
+        font-size: 8pt;
+        color: #64748b;
+    }
+    
+    .temp-bar-container {
+        flex: 1;
+        height: 12px;
+        background: #f1f5f9;
+        border-radius: 2px;
+    }
+    
+    .temp-bar-fill {
+        height: 100%;
+        background: #22c55e;
+        border-radius: 2px;
+    }
+    
+    .temp-bar-fill.high {
+        background: #ef4444;
+    }
+    
+    .temp-bar-fill.medium {
+        background: #f59e0b;
+    }
+    
+    .temp-chart-value {
+        width: 60px;
+        font-size: 7pt;
+        color: #64748b;
+        text-align: right;
+    }
+    
+    /* 匯總統計 */
+    .summary-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin: 8px 0;
+    }
+    
+    .summary-card {
+        background: #f8fafc;
+        padding: 6px;
+        border-radius: 3px;
+        text-align: center;
+        border: 1px solid #e2e8f0;
+    }
+    
+    .summary-label {
+        font-size: 7pt;
+        color: #64748b;
+        display: block;
+    }
+    
+    .summary-value {
+        font-size: 12pt;
+        font-weight: 700;
+        color: #1e293b;
+    }
+    
+    .summary-unit {
+        font-size: 7pt;
+        color: #64748b;
+    }
+    
+    /* 避免不當分頁 */
+    table, figure {
+        page-break-inside: avoid;
+    }
+    
+    h2, h3 {
+        page-break-after: avoid;
+    }
+}
+        font-weight: 700;
+        color: #1e293b;
+        display: block;
+        margin-top: 3px;
+    }
+    
+    .hvac-unit {
+        font-size: 8pt;
+        color: #64748b;
+    }
+    
+    /* 表格 */
+    .detail-table {
+        margin: 15px 0;
+    }
+    
+    .detail-table table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 9pt;
+    }
+    
+    .detail-table th, .detail-table td {
+        padding: 8px 10px;
+        text-align: left;
+        border: 1px solid #cbd5e1;
+    }
+    
+    .detail-table th {
+        background: #f1f5f9;
+        font-weight: 600;
+        color: #334155;
+    }
+    
+    .detail-table td {
+        color: #475569;
+    }
+    
+    .detail-table tr:last-child td {
+        background: #f1f5f9;
+        font-weight: 600;
+    }
+    
+    /* 建議區塊 */
+    .recommendations {
+        margin: 15px 0;
+        page-break-inside: avoid;
+    }
+    
+    .recommendations-content {
+        display: block;
+    }
+    
+    .recommendation-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px;
+        margin-bottom: 8px;
+        background: #f0fdf4;
+        border-left: 4px solid #22c55e;
+        border-radius: 0 4px 4px 0;
+    }
+    
+    .recommendation-item.warning {
+        background: #fffbeb;
+        border-left-color: #f59e0b;
+    }
+    
+    .recommendation-item.danger {
+        background: #fef2f2;
+        border-left-color: #ef4444;
+    }
+    
+    .recommendation-item.info {
+        background: #eff6ff;
+        border-left-color: #3b82f6;
+    }
+    
+    .recommendation-icon {
+        font-size: 14pt;
+    }
+    
+    /* 溫度分布圖表 */
+    .temperature-chart {
+        margin: 10px 0;
+        page-break-inside: avoid;
+    }
+    
+    .temp-chart-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 4px;
+    }
+    
+    .temp-chart-label {
+        width: 40px;
+        font-size: 9pt;
+        color: #64748b;
+    }
+    
+    .temp-bar-container {
+        flex: 1;
+        height: 14px;
+        background: #f1f5f9;
+        border-radius: 2px;
+    }
+    
+    .temp-bar-fill {
+        height: 100%;
+        background: #22c55e;
+        border-radius: 2px;
+    }
+    
+    .temp-bar-fill.high {
+        background: #ef4444;
+    }
+    
+    .temp-bar-fill.medium {
+        background: #f59e0b;
+    }
+    
+    .temp-chart-value {
+        width: 70px;
+        font-size: 8pt;
+        color: #64748b;
+        text-align: right;
+    }
+    
+    /* 匯總統計 */
+    .summary-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin: 10px 0;
+    }
+    
+    .summary-card {
+        background: #f8fafc;
+        padding: 10px;
+        border-radius: 4px;
+        text-align: center;
+        border: 1px solid #e2e8f0;
+    }
+    
+    .summary-label {
+        font-size: 8pt;
+        color: #64748b;
+        display: block;
+    }
+    
+    .summary-value {
+        font-size: 14pt;
+        font-weight: 700;
+        color: #1e293b;
+    }
+    
+    .summary-unit {
+        font-size: 8pt;
+        color: #64748b;
+    }
+    
+    /* 分頁控制 */
+    .page-break {
+        page-break-before: always;
+    }
+    
+    /* 避免不當分頁 */
+    table, figure {
+        page-break-inside: avoid;
+    }
+    
+    h2, h3 {
+        page-break-after: avoid;
+    }
+}
