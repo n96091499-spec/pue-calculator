@@ -1,5 +1,29 @@
 // ============ 氣象數據 - 從 Excel 讀取 ============
 const WEATHER_DATA = {
+    newtaipei: {
+        wet: [
+            { temp: 5, hours: 8 }, { temp: 6, hours: 37 }, { temp: 7, hours: 35 },
+            { temp: 8, hours: 84 }, { temp: 9, hours: 201 }, { temp: 10, hours: 208 },
+            { temp: 11, hours: 204 }, { temp: 12, hours: 301 }, { temp: 13, hours: 396 },
+            { temp: 14, hours: 416 }, { temp: 15, hours: 366 }, { temp: 16, hours: 392 },
+            { temp: 17, hours: 409 }, { temp: 18, hours: 419 }, { temp: 19, hours: 369 },
+            { temp: 20, hours: 311 }, { temp: 21, hours: 519 }, { temp: 22, hours: 467 },
+            { temp: 23, hours: 696 }, { temp: 24, hours: 1056 }, { temp: 25, hours: 851 },
+            { temp: 26, hours: 675 }, { temp: 27, hours: 315 }, { temp: 28, hours: 25 }
+        ],
+        dry: [
+            { temp: 7, hours: 5 }, { temp: 8, hours: 22 }, { temp: 9, hours: 48 },
+            { temp: 10, hours: 92 }, { temp: 11, hours: 154 }, { temp: 12, hours: 191 },
+            { temp: 13, hours: 239 }, { temp: 14, hours: 312 }, { temp: 15, hours: 368 },
+            { temp: 16, hours: 346 }, { temp: 17, hours: 374 }, { temp: 18, hours: 391 },
+            { temp: 19, hours: 440 }, { temp: 20, hours: 419 }, { temp: 21, hours: 355 },
+            { temp: 22, hours: 422 }, { temp: 23, hours: 389 }, { temp: 24, hours: 465 },
+            { temp: 25, hours: 684 }, { temp: 26, hours: 633 }, { temp: 27, hours: 513 },
+            { temp: 28, hours: 433 }, { temp: 29, hours: 326 }, { temp: 30, hours: 234 },
+            { temp: 31, hours: 248 }, { temp: 32, hours: 241 }, { temp: 33, hours: 252 },
+            { temp: 34, hours: 136 }, { temp: 35, hours: 26 }, { temp: 36, hours: 2 }
+        ]
+    },
     taoyuan: {
         wet: [
             { temp: 29, hours: 1 }, { temp: 28, hours: 148 }, { temp: 27, hours: 938 },
@@ -77,30 +101,6 @@ const WEATHER_DATA = {
             { temp: 12, hours: 39 }, { temp: 11, hours: 32 }, { temp: 10, hours: 11 },
             { temp: 9, hours: 11 }, { temp: 8, hours: 2 }, { temp: 7, hours: 0 }
         ]
-    },
-    newtaipei: {
-        wet: [
-            { temp: 5, hours: 8 }, { temp: 6, hours: 37 }, { temp: 7, hours: 35 },
-            { temp: 8, hours: 84 }, { temp: 9, hours: 207 }, { temp: 10, hours: 211 },
-            { temp: 11, hours: 219 }, { temp: 12, hours: 301 }, { temp: 13, hours: 396 },
-            { temp: 14, hours: 416 }, { temp: 15, hours: 366 }, { temp: 16, hours: 392 },
-            { temp: 17, hours: 409 }, { temp: 18, hours: 419 }, { temp: 19, hours: 369 },
-            { temp: 20, hours: 311 }, { temp: 21, hours: 519 }, { temp: 22, hours: 467 },
-            { temp: 23, hours: 696 }, { temp: 24, hours: 1056 }, { temp: 25, hours: 851 },
-            { temp: 26, hours: 675 }, { temp: 27, hours: 315 }, { temp: 28, hours: 25 }
-        ],
-        dry: [
-            { temp: 7, hours: 5 }, { temp: 8, hours: 22 }, { temp: 9, hours: 48 },
-            { temp: 10, hours: 98 }, { temp: 11, hours: 157 }, { temp: 12, hours: 195 },
-            { temp: 13, hours: 249 }, { temp: 14, hours: 313 }, { temp: 15, hours: 368 },
-            { temp: 16, hours: 346 }, { temp: 17, hours: 374 }, { temp: 18, hours: 391 },
-            { temp: 19, hours: 440 }, { temp: 20, hours: 419 }, { temp: 21, hours: 355 },
-            { temp: 22, hours: 422 }, { temp: 23, hours: 389 }, { temp: 24, hours: 465 },
-            { temp: 25, hours: 684 }, { temp: 26, hours: 633 }, { temp: 27, hours: 513 },
-            { temp: 28, hours: 433 }, { temp: 29, hours: 326 }, { temp: 30, hours: 234 },
-            { temp: 31, hours: 248 }, { temp: 32, hours: 241 }, { temp: 33, hours: 252 },
-            { temp: 34, hours: 136 }, { temp: 35, hours: 26 }, { temp: 36, hours: 2 }
-        ]
     }
 };
 
@@ -128,14 +128,14 @@ const SUGGESTED_VALUES = {
 };
 
 const REGION_NAMES = {
+    newtaipei: '新北',
     taoyuan: '桃園',
     taichung: '台中',
-    kaohsiung: '高雄',
-    newtaipei: '新北'
+    kaohsiung: '高雄'
 };
 
 let currentSystem = 'water';
-let currentRegion = 'taoyuan';
+let currentRegion = 'newtaipei';
 let currentWeatherData = null;
 
 document.addEventListener('DOMContentLoaded', function() {
