@@ -259,6 +259,10 @@ function updateStatsDisplay() {
 
 // 風冷系統專用：更新濕球溫度分布圖
 function updateWetStatsDisplay(region) {
+    // 更新濕球溫度分布的標題區域
+    const regionName = REGION_NAMES[region];
+    document.getElementById('wet-region-title').textContent = regionName;
+    
     const wetWeatherData = WEATHER_DATA[region].wet;
     const totalHours = wetWeatherData.reduce((sum, item) => sum + item.hours, 0);
     const maxHours = Math.max(...wetWeatherData.map(d => d.hours));
