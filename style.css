@@ -1373,3 +1373,87 @@ footer .designer {
         page-break-after: avoid;
     }
 }
+
+/* 區域選擇器 */
+.region-group-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.region-group-btn {
+    flex: 1;
+    min-width: 100px;
+    max-width: 150px;
+    padding: 12px 16px;
+    font-size: 16px;
+    font-weight: 600;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.region-group-btn:hover {
+    border-color: #3b82f6;
+    color: #3b82f6;
+    background: #eff6ff;
+}
+
+.region-group-btn.active {
+    border-color: #3b82f6;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* 城市群組 */
+.city-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.city-group.hidden {
+    display: none;
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+    .region-group-selector {
+        gap: 8px;
+    }
+    
+    .region-group-btn {
+        min-width: 80px;
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+    
+    .region-selector {
+        gap: 8px;
+    }
+    
+    .region-btn {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .region-group-btn {
+        min-width: 70px;
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+    
+    .region-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}

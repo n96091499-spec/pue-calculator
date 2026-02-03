@@ -900,6 +900,7 @@ const REGION_NAMES = {
 
 let currentSystem = 'water';
 let currentRegion = 'tamsui';
+let currentRegionGroup = 'north';
 let currentWeatherData = null;
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -993,6 +994,32 @@ function selectSystem(system) {
     document.getElementById('region-section').classList.remove('hidden');
     if (currentRegion) {
         selectRegion(currentRegion);
+    }
+}
+
+function selectRegionGroup(group) {
+    currentRegionGroup = group;
+    
+    // 更新區域按鈕狀態
+    document.querySelectorAll('.region-group-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.group === group) {
+            btn.classList.add('active');
+        }
+    });
+    
+    // 顯示對應的城市群組
+    document.querySelectorAll('.city-group').forEach(div => {
+        div.classList.add('hidden');
+        if (div.dataset.group === group) {
+            div.classList.remove('hidden');
+        }
+    });
+    
+    // 自動選取該區域的第一個城市
+    const firstCity = document.querySelector(`.city-group[data-group="${group}"] .region-btn`);
+    if (firstCity) {
+        selectRegion(firstCity.dataset.region);
     }
 }
 

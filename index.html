@@ -32,55 +32,88 @@
         <!-- 地區選擇 -->
         <section id="region-section" class="region-section hidden">
             <h2>📍 選擇資料中心所在地區</h2>
-            <div class="region-selector">
-                <button type="button" class="region-btn active" data-region="tamsui" onclick="selectRegion('tamsui')">
-                    🏖️ 淡水
+            
+            <!-- 區域選擇 -->
+            <div class="region-group-selector">
+                <button type="button" class="region-group-btn active" data-group="north" onclick="selectRegionGroup('north')">
+                    🏔️ 北部
                 </button>
-                <button type="button" class="region-btn" data-region="taipei" onclick="selectRegion('taipei')">
-                    🌃 臺北
+                <button type="button" class="region-group-btn" data-group="central" onclick="selectRegionGroup('central')">
+                    🏛️ 中部
                 </button>
-                <button type="button" class="region-btn" data-region="keelung" onclick="selectRegion('keelung')">
-                    ⚓ 基隆
+                <button type="button" class="region-group-btn" data-group="south" onclick="selectRegionGroup('south')">
+                    🌴 南部
                 </button>
-                <button type="button" class="region-btn" data-region="yilan" onclick="selectRegion('yilan')">
-                    🌧️ 宜蘭
+                <button type="button" class="region-group-btn" data-group="east" onclick="selectRegionGroup('east')">
+                    🌊 東部
                 </button>
-                <button type="button" class="region-btn" data-region="newtaipei" onclick="selectRegion('newtaipei')">
-                    🏪 新北
-                </button>
-                <button type="button" class="region-btn" data-region="taoyuan" onclick="selectRegion('taoyuan')">
-                    🌆 桃園
-                </button>
-                <button type="button" class="region-btn" data-region="hsinchu" onclick="selectRegion('hsinchu')">
-                    🏙️ 新竹
-                </button>
-                <button type="button" class="region-btn" data-region="xinwu" onclick="selectRegion('xinwu')">
-                    🌾 新屋
-                </button>
-                <button type="button" class="region-btn" data-region="taichung" onclick="selectRegion('taichung')">
-                    🏛️ 臺中
-                </button>
-                <button type="button" class="region-btn" data-region="chiayi" onclick="selectRegion('chiayi')">
-                    🎋 嘉義
-                </button>
-                <button type="button" class="region-btn" data-region="tainan" onclick="selectRegion('tainan')">
-                    🏯 臺南
-                </button>
-                <button type="button" class="region-btn" data-region="kaohsiung" onclick="selectRegion('kaohsiung')">
-                    🏙️ 高雄
-                </button>
-                <button type="button" class="region-btn" data-region="hualien" onclick="selectRegion('hualien')">
-                    🌊 花蓮
-                </button>
-                <button type="button" class="region-btn" data-region="taidong" onclick="selectRegion('taidong')">
-                    🌴 臺東
-                </button>
-                <button type="button" class="region-btn" data-region="chenggong" onclick="selectRegion('chenggong')">
-                    🏝️ 成功
-                </button>
-                <button type="button" class="region-btn" data-region="hengchun" onclick="selectRegion('hengchun')">
-                    🏖️ 恆春
-                </button>
+            </div>
+            
+            <!-- 城市選擇 (依區域顯示) -->
+            <div class="region-selector" id="city-selector">
+                <!-- 北部 -->
+                <div class="city-group" data-group="north">
+                    <button type="button" class="region-btn active" data-region="tamsui" onclick="selectRegion('tamsui')">
+                        🏖️ 淡水
+                    </button>
+                    <button type="button" class="region-btn" data-region="taipei" onclick="selectRegion('taipei')">
+                        🌃 臺北
+                    </button>
+                    <button type="button" class="region-btn" data-region="keelung" onclick="selectRegion('keelung')">
+                        ⚓ 基隆
+                    </button>
+                    <button type="button" class="region-btn" data-region="yilan" onclick="selectRegion('yilan')">
+                        🌧️ 宜蘭
+                    </button>
+                    <button type="button" class="region-btn" data-region="newtaipei" onclick="selectRegion('newtaipei')">
+                        🏪 新北
+                    </button>
+                    <button type="button" class="region-btn" data-region="taoyuan" onclick="selectRegion('taoyuan')">
+                        🌆 桃園
+                    </button>
+                    <button type="button" class="region-btn" data-region="hsinchu" onclick="selectRegion('hsinchu')">
+                        🏙️ 新竹
+                    </button>
+                    <button type="button" class="region-btn" data-region="xinwu" onclick="selectRegion('xinwu')">
+                        🌾 新屋
+                    </button>
+                </div>
+                
+                <!-- 中部 -->
+                <div class="city-group hidden" data-group="central">
+                    <button type="button" class="region-btn active" data-region="taichung" onclick="selectRegion('taichung')">
+                        🏛️ 臺中
+                    </button>
+                    <button type="button" class="region-btn" data-region="chiayi" onclick="selectRegion('chiayi')">
+                        🎋 嘉義
+                    </button>
+                </div>
+                
+                <!-- 南部 -->
+                <div class="city-group hidden" data-group="south">
+                    <button type="button" class="region-btn active" data-region="tainan" onclick="selectRegion('tainan')">
+                        🏯 臺南
+                    </button>
+                    <button type="button" class="region-btn" data-region="kaohsiung" onclick="selectRegion('kaohsiung')">
+                        🏙️ 高雄
+                    </button>
+                </div>
+                
+                <!-- 東部 -->
+                <div class="city-group hidden" data-group="east">
+                    <button type="button" class="region-btn active" data-region="hualien" onclick="selectRegion('hualien')">
+                        🌊 花蓮
+                    </button>
+                    <button type="button" class="region-btn" data-region="taidong" onclick="selectRegion('taidong')">
+                        🌴 臺東
+                    </button>
+                    <button type="button" class="region-btn" data-region="chenggong" onclick="selectRegion('chenggong')">
+                        🏝️ 成功
+                    </button>
+                    <button type="button" class="region-btn" data-region="hengchun" onclick="selectRegion('hengchun')">
+                        🏖️ 恆春
+                    </button>
+                </div>
             </div>
         </section>
 
