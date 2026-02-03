@@ -1,5 +1,5 @@
 // ============ 氣象數據 - 從 Excel 讀取 ============
-// 由北到南排序
+// 由北到南排序 | 每個地區總時數皆為 8760 小時/年
 const WEATHER_DATA = {
 
     tamsui: {
@@ -483,6 +483,67 @@ const WEATHER_DATA = {
         ]
     },
 
+    tianzhong: {
+        wet: [
+            { temp: 4, hours: 1 },
+            { temp: 5, hours: 4 },
+            { temp: 6, hours: 10 },
+            { temp: 7, hours: 26 },
+            { temp: 8, hours: 40 },
+            { temp: 9, hours: 98 },
+            { temp: 10, hours: 165 },
+            { temp: 11, hours: 181 },
+            { temp: 12, hours: 223 },
+            { temp: 13, hours: 365 },
+            { temp: 14, hours: 393 },
+            { temp: 15, hours: 477 },
+            { temp: 16, hours: 394 },
+            { temp: 17, hours: 306 },
+            { temp: 18, hours: 329 },
+            { temp: 19, hours: 347 },
+            { temp: 20, hours: 366 },
+            { temp: 21, hours: 356 },
+            { temp: 22, hours: 438 },
+            { temp: 23, hours: 566 },
+            { temp: 24, hours: 939 },
+            { temp: 25, hours: 1209 },
+            { temp: 26, hours: 1045 },
+            { temp: 27, hours: 430 },
+            { temp: 28, hours: 52 },
+        ],
+        dry: [
+            { temp: 6, hours: 3 },
+            { temp: 7, hours: 10 },
+            { temp: 8, hours: 9 },
+            { temp: 9, hours: 15 },
+            { temp: 10, hours: 59 },
+            { temp: 11, hours: 107 },
+            { temp: 12, hours: 125 },
+            { temp: 13, hours: 128 },
+            { temp: 14, hours: 334 },
+            { temp: 15, hours: 357 },
+            { temp: 16, hours: 363 },
+            { temp: 17, hours: 321 },
+            { temp: 18, hours: 274 },
+            { temp: 19, hours: 280 },
+            { temp: 20, hours: 300 },
+            { temp: 21, hours: 338 },
+            { temp: 22, hours: 323 },
+            { temp: 23, hours: 359 },
+            { temp: 24, hours: 543 },
+            { temp: 25, hours: 714 },
+            { temp: 26, hours: 794 },
+            { temp: 27, hours: 732 },
+            { temp: 28, hours: 571 },
+            { temp: 29, hours: 438 },
+            { temp: 30, hours: 356 },
+            { temp: 31, hours: 362 },
+            { temp: 32, hours: 356 },
+            { temp: 33, hours: 164 },
+            { temp: 34, hours: 25 },
+        ]
+    },
+
     chiayi: {
         wet: [
             { temp: 5, hours: 4 },
@@ -495,7 +556,7 @@ const WEATHER_DATA = {
             { temp: 12, hours: 159 },
             { temp: 13, hours: 270 },
             { temp: 14, hours: 380 },
-            { temp: 15, hours: 482 },
+            { temp: 15, hours: 587 },
             { temp: 16, hours: 418 },
             { temp: 17, hours: 318 },
             { temp: 18, hours: 310 },
@@ -519,7 +580,7 @@ const WEATHER_DATA = {
             { temp: 12, hours: 147 },
             { temp: 13, hours: 121 },
             { temp: 14, hours: 271 },
-            { temp: 15, hours: 383 },
+            { temp: 15, hours: 488 },
             { temp: 16, hours: 390 },
             { temp: 17, hours: 315 },
             { temp: 18, hours: 253 },
@@ -623,7 +684,7 @@ const WEATHER_DATA = {
             { temp: 25, hours: 1101 },
             { temp: 26, hours: 1285 },
             { temp: 27, hours: 768 },
-            { temp: 28, hours: 108 },
+            { temp: 28, hours: 110 },
         ],
         dry: [
             { temp: 8, hours: 7 },
@@ -646,7 +707,7 @@ const WEATHER_DATA = {
             { temp: 25, hours: 762 },
             { temp: 26, hours: 840 },
             { temp: 27, hours: 676 },
-            { temp: 28, hours: 716 },
+            { temp: 28, hours: 718 },
             { temp: 29, hours: 560 },
             { temp: 30, hours: 487 },
             { temp: 31, hours: 450 },
@@ -895,7 +956,8 @@ const REGION_NAMES = {
     hualien: '花蓮',
     taidong: '臺東',
     chenggong: '成功',
-    hengchun: '恆春'
+    hengchun: '恆春',
+    tianzhong: '田中'
 };
 
 let currentSystem = 'water';
