@@ -1043,7 +1043,66 @@ function suggestValue(inputId, category) {
         const midValue = (suggestion.min + suggestion.max) / 2;
         const suggested = itPower * midValue;
         document.getElementById(inputId).value = suggested.toFixed(1);
+        // 同步更新 PUE 欄位
+        const pueInput = document.getElementById(inputId + '-pue');
+        if (pueInput && itPower > 0) {
+            pueInput.value = (suggested / itPower).toFixed(4);
+        }
     }
+}
+
+// 當輸入 kW 時，自動計算並填入 PUE 增加量
+function onKwChange(inputId) {
+    const itPower = parseFloat(document.getElementById('it-power').value) || 0;
+    const kwValue = parseFloat(document.getElementById(inputId).value) || 0;
+    const pueInput = document.getElementById(inputId + '-pue');
+    
+    if (pueInput) {
+        if (itPower > 0) {
+            pueInput.value = (kwValue / itPower).toFixed(4);
+        } else {
+            pueInput.value = '0';
+        }
+    }
+}
+
+// 當輸入 PUE 增加量時，自動計算並填入 kW
+function onPueChange(inputId) {
+    const itPower = parseFloat(document.getElementById('it-power').value) || 0;
+    const pueValue = parseFloat(document.getElementById(inputId + '-pue').value) || 0;
+    const kwInput = document.getElementById(inputId);
+    
+    if (kwInput) {
+        if (itPower > 0) {
+            kwInput.value = (pueValue * itPower).toFixed(1);
+        } else {
+            kwInput.value = '0';
+        }
+    }
+}
+
+// 當 IT 設備用電量改變時，同步更新所有 PUE 欄位
+function onItPowerChange() {
+    const itPower = parseFloat(document.getElementById('it-power').value) || 0;
+    const inputIds = [
+        'distribution-loss', 'transformer-loss', 'generator-power', 'other-power',
+        'cdu-power', 'crac-power', 'pump-fan-power', 'other-cooling',
+        'lighting-power', 'fire-system-power', 'security-power', 'office-power', 'misc-power'
+    ];
+    
+    inputIds.forEach(inputId => {
+        const kwInput = document.getElementById(inputId);
+        const pueInput = document.getElementById(inputId + '-pue');
+        
+        if (kwInput && pueInput) {
+            const kwValue = parseFloat(kwInput.value) || 0;
+            if (itPower > 0) {
+                pueInput.value = (kwValue / itPower).toFixed(4);
+            } else {
+                pueInput.value = '0';
+            }
+        }
+    });
 }
 
 // 自動生成整個類別的建議值

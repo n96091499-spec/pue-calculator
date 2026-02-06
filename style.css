@@ -423,6 +423,30 @@ section h2 {
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
+/* PUE 輸入樣式 */
+.pue-divider {
+    color: var(--gray-400);
+    font-size: 0.85rem;
+    margin: 0 8px;
+}
+
+.percent-hint {
+    color: var(--gray-500);
+    font-size: 0.75rem;
+    margin-left: 4px;
+}
+
+.input-row input[type="number"]:nth-of-type(2) {
+    width: 100px;
+    border-color: var(--success);
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+}
+
+.input-row input[type="number"]:nth-of-type(2):focus {
+    border-color: var(--success);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
 /* ============ 建議按鈕 ============ */
 .suggest-btn {
     background: none;
