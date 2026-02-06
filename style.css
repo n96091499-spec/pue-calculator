@@ -954,11 +954,19 @@ footer .designer {
     border-top: 1px solid var(--gray-200);
     font-size: 0.9rem;
     color: var(--gray-600);
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .table-summary strong {
     color: var(--primary);
     font-size: 1.1rem;
+}
+
+.table-buttons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
 }
 
 @media (max-width: 640px) {

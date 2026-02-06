@@ -999,6 +999,11 @@ const SUGGESTED_VALUES = {
         'security-power': { min: 0.001, max: 0.003, desc: '保全系統' },
         'office-power': { min: 0.01, max: 0.03, desc: '辦公室用電' },
         'misc-power': { min: 0.005, max: 0.01, desc: '其他雜項用電' }
+    },
+    // 冷水機組和冷卻水塔的建議值
+    hvac: {
+        'chiller': { min: 0.4, max: 0.8, desc: '冷水機組' },
+        'tower': { min: 0.015, max: 0.03, desc: '冷卻水塔' }
     }
 };
 
@@ -1325,6 +1330,9 @@ function generatePowerInputTables(region) {
 
 // 生成表格的通用函數
 function generatePowerTableHTML(prefix, title, tempLabel, activeTemps, avgId) {
+    // 建議按鈕的文字
+    const suggestBtn = prefix === 'chiller' ? '💡 冷水機組建議' : '💡 冷卻水塔建議';
+    
     let html = `
         <div class="power-table-section">
             <h3>${title}</h3>
@@ -1357,12 +1365,48 @@ function generatePowerTableHTML(prefix, title, tempLabel, activeTemps, avgId) {
             </div>
             <div class="table-summary">
                 <span>平均耗電量: <strong id="${avgId}">0</strong> kW</span>
-                <button type="button" class="auto-fill-btn-large" onclick="${prefix === 'chiller' ? 'autoFillChiller()' : 'autoFillTower()'}">自動生成其他</button>
+                <span class="pue-divider">或</span>
+                <span>平均增加: <strong id="${avgId}-pue">0</strong> PUE</span>
+                <div class="table-buttons">
+                    <button type="button" class="suggest-btn" onclick="suggestHVAC('${prefix}')" title="建議值">${suggestBtn}</button>
+                    <button type="button" class="auto-fill-btn-large" onclick="${prefix === 'chiller' ? 'autoFillChiller()' : 'autoFillTower()'}">自動生成其他</button>
+                </div>
             </div>
         </div>
     `;
     
     return html;
+}
+
+// 冷水機組和冷卻水塔的建議值
+function suggestHVAC(prefix) {
+    const itPower = parseFloat(document.getElementById('it-power').value) || 0;
+    if (itPower <= 0) {
+        alert('請先輸入 IT 設備用電量！');
+        document.getElementById('it-power').focus();
+        return;
+    }
+    
+    const suggestion = SUGGESTED_VALUES.hvac[prefix];
+    if (suggestion) {
+        const midValue = (suggestion.min + suggestion.max) / 2;
+        const suggested = itPower * midValue;
+        const idPrefix = prefix === 'chiller' ? 'chiller' : 'tower';
+        
+        // 填入第一個溫度點，讓使用者可以參考
+        const firstInput = document.getElementById(`${idPrefix}-temp-28`);
+        if (firstInput) {
+            firstInput.value = suggested.toFixed(1);
+        }
+        
+        // 更新平均值顯示
+        const avgId = prefix === 'chiller' ? 'chiller-avg-power' : 'tower-avg-power';
+        const avgPueId = `${avgId}-pue`;
+        document.getElementById(avgId).textContent = suggested.toFixed(1);
+        document.getElementById(avgPueId).textContent = midValue.toFixed(4);
+        
+        alert(`${suggestion.desc} 建議值：${suggested.toFixed(1)} kW (約增加 ${midValue.toFixed(4)} PUE)\n已填入第一個溫度欄位，請參考調整！`);
+    }
 }
 
 function updateWeightedAverages() {
@@ -1414,8 +1458,19 @@ function updateWeightedAverages() {
     
     const chillerAvg = chillerHours > 0 ? chillerTotal / chillerHours : 0;
     const towerAvg = towerHours > 0 ? towerTotal / towerHours : 0;
+    const itPower = parseFloat(document.getElementById('it-power').value) || 0;
+    
     document.getElementById('chiller-avg-power').textContent = chillerAvg.toFixed(2);
     document.getElementById('tower-avg-power').textContent = towerAvg.toFixed(2);
+    
+    // 同步更新 PUE 增加量顯示
+    if (itPower > 0) {
+        document.getElementById('chiller-avg-power-pue').textContent = (chillerAvg / itPower).toFixed(4);
+        document.getElementById('tower-avg-power-pue').textContent = (towerAvg / itPower).toFixed(4);
+    } else {
+        document.getElementById('chiller-avg-power-pue').textContent = '0';
+        document.getElementById('tower-avg-power-pue').textContent = '0';
+    }
 }
 
 // 線性插值自動填充冷水機組

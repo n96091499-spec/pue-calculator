@@ -222,7 +222,7 @@
                             <span class="pue-divider">或</span>
                             <input type="number" id="distribution-loss-pue" placeholder="PUE" step="0.001" value="0" oninput="onPueChange('distribution-loss')">
                             <span class="unit">PUE</span>
-                            <span class="percent-hint">(增加)</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('distribution-loss', 'power')" title="建議值">💡</button>
                         </div>
                         <!-- 變壓器損耗 -->
                         <div class="input-row">
@@ -232,7 +232,7 @@
                             <span class="pue-divider">或</span>
                             <input type="number" id="transformer-loss-pue" placeholder="PUE" step="0.001" value="0" oninput="onPueChange('transformer-loss')">
                             <span class="unit">PUE</span>
-                            <span class="percent-hint">(增加)</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('transformer-loss', 'power')" title="建議值">💡</button>
                         </div>
                         <!-- 發電機用電 -->
                         <div class="input-row">
@@ -242,7 +242,7 @@
                             <span class="pue-divider">或</span>
                             <input type="number" id="generator-power-pue" placeholder="PUE" step="0.001" value="0" oninput="onPueChange('generator-power')">
                             <span class="unit">PUE</span>
-                            <span class="percent-hint">(增加)</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('generator-power', 'power')" title="建議值">💡</button>
                         </div>
                         <!-- 其他電力設施 -->
                         <div class="input-row">
@@ -252,7 +252,7 @@
                             <span class="pue-divider">或</span>
                             <input type="number" id="other-power-pue" placeholder="PUE" step="0.001" value="0" oninput="onPueChange('other-power')">
                             <span class="unit">PUE</span>
-                            <span class="percent-hint">(增加)</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('other-power', 'power')" title="建議值">💡</button>
                         </div>
                     </div>
                 </div>
@@ -274,7 +274,7 @@
                             <span class="pue-divider">或</span>
                             <input type="number" id="cdu-power-pue" placeholder="PUE" step="0.001" value="0" oninput="onPueChange('cdu-power')">
                             <span class="unit">PUE</span>
-                            <span class="percent-hint">(增加)</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('cdu-power', 'cooling')" title="建議值">💡</button>
                         </div>
                         <!-- CRAH/CRAC/FWU 機組 -->
                         <div class="input-row">
@@ -284,7 +284,7 @@
                             <span class="pue-divider">或</span>
                             <input type="number" id="crac-power-pue" placeholder="PUE" step="0.001" value="0" oninput="onPueChange('crac-power')">
                             <span class="unit">PUE</span>
-                            <span class="percent-hint">(增加)</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('crac-power', 'cooling')" title="建議值">💡</button>
                         </div>
                         <!-- 幫浦與風扇 -->
                         <div class="input-row">
@@ -294,7 +294,7 @@
                             <span class="pue-divider">或</span>
                             <input type="number" id="pump-fan-power-pue" placeholder="PUE" step="0.001" value="0" oninput="onPueChange('pump-fan-power')">
                             <span class="unit">PUE</span>
-                            <span class="percent-hint">(增加)</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('pump-fan-power', 'cooling')" title="建議值">💡</button>
                         </div>
                         <!-- 其他冷卻設備 -->
                         <div class="input-row">
@@ -304,7 +304,7 @@
                             <span class="pue-divider">或</span>
                             <input type="number" id="other-cooling-pue" placeholder="PUE" step="0.001" value="0" oninput="onPueChange('other-cooling')">
                             <span class="unit">PUE</span>
-                            <span class="percent-hint">(增加)</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('other-cooling', 'cooling')" title="建議值">💡</button>
                         </div>
                     </div>
                 </div>
@@ -326,7 +326,7 @@
                             <span class="pue-divider">或</span>
                             <input type="number" id="lighting-power-pue" placeholder="PUE" step="0.001" value="0" oninput="onPueChange('lighting-power')">
                             <span class="unit">PUE</span>
-                            <span class="percent-hint">(增加)</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('lighting-power', 'other')" title="建議值">💡</button>
                         </div>
                         <!-- 消防系統 -->
                         <div class="input-row">
@@ -336,7 +336,7 @@
                             <span class="pue-divider">或</span>
                             <input type="number" id="fire-system-power-pue" placeholder="PUE" step="0.001" value="0" oninput="onPueChange('fire-system-power')">
                             <span class="unit">PUE</span>
-                            <span class="percent-hint">(增加)</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('fire-system-power', 'other')" title="建議值">💡</button>
                         </div>
                         <!-- 保全系統 -->
                         <div class="input-row">
@@ -346,7 +346,7 @@
                             <span class="pue-divider">或</span>
                             <input type="number" id="security-power-pue" placeholder="PUE" step="0.001" value="0" oninput="onPueChange('security-power')">
                             <span class="unit">PUE</span>
-                            <span class="percent-hint">(增加)</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('security-power', 'other')" title="建議值">💡</button>
                         </div>
                         <!-- 辦公室用電 -->
                         <div class="input-row">
@@ -356,7 +356,7 @@
                             <span class="pue-divider">或</span>
                             <input type="number" id="office-power-pue" placeholder="PUE" step="0.001" value="0" oninput="onPueChange('office-power')">
                             <span class="unit">PUE</span>
-                            <span class="percent-hint">(增加)</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('office-power', 'other')" title="建議值">💡</button>
                         </div>
                         <!-- 其他雜項用電 -->
                         <div class="input-row">
@@ -366,7 +366,7 @@
                             <span class="pue-divider">或</span>
                             <input type="number" id="misc-power-pue" placeholder="PUE" step="0.001" value="0" oninput="onPueChange('misc-power')">
                             <span class="unit">PUE</span>
-                            <span class="percent-hint">(增加)</span>
+                            <button type="button" class="suggest-btn" onclick="suggestValue('misc-power', 'other')" title="建議值">💡</button>
                         </div>
                     </div>
                 </div>
