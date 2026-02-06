@@ -1002,7 +1002,7 @@ const SUGGESTED_VALUES = {
     },
     // 冷水機組和冷卻水塔的建議值
     hvac: {
-        'chiller': { min: 0.4, max: 0.8, desc: '冷水機組' },
+        'chiller': { min: 0.1, max: 0.2, desc: '冷水機組' },
         'tower': { min: 0.015, max: 0.03, desc: '冷卻水塔' }
     }
 };
@@ -1390,22 +1390,47 @@ function suggestHVAC(prefix) {
     const suggestion = SUGGESTED_VALUES.hvac[prefix];
     if (suggestion) {
         const midValue = (suggestion.min + suggestion.max) / 2;
-        const suggested = itPower * midValue;
         const idPrefix = prefix === 'chiller' ? 'chiller' : 'tower';
         
-        // 填入第一個溫度點，讓使用者可以參考
-        const firstInput = document.getElementById(`${idPrefix}-temp-28`);
-        if (firstInput) {
-            firstInput.value = suggested.toFixed(1);
-        }
+        // 根據系統類型選擇天氣數據
+        const weatherData = currentSystem === 'water' 
+            ? WEATHER_DATA[currentRegion].wet 
+            : (prefix === 'chiller' ? WEATHER_DATA[currentRegion].dry : WEATHER_DATA[currentRegion].wet);
         
-        // 更新平均值顯示
-        const avgId = prefix === 'chiller' ? 'chiller-avg-power' : 'tower-avg-power';
-        const avgPueId = `${avgId}-pue`;
-        document.getElementById(avgId).textContent = suggested.toFixed(1);
-        document.getElementById(avgPueId).textContent = midValue.toFixed(4);
+        // 填入所有溫度區間
+        let filledCount = 0;
+        weatherData.forEach(item => {
+            if (item.hours > 0) {
+                const input = document.getElementById(`${idPrefix}-temp-${item.temp}`);
+                if (input) {
+                    // 冷水機組：溫度越高，耗電量越大（線性增加）
+                    // 冷卻水塔：溫度越高，耗電量越大（線性增加）
+                    let factor = 1;
+                    if (prefix === 'chiller') {
+                        // 冷水機組：從最低溫到最高溫，耗電量增加 50%
+                        const temps = weatherData.filter(d => d.hours > 0).map(d => d.temp);
+                        const minTemp = Math.min(...temps);
+                        const maxTemp = Math.max(...temps);
+                        factor = 0.75 + 0.25 * (item.temp - minTemp) / (maxTemp - minTemp || 1);
+                    } else {
+                        // 冷卻水塔：從最低溫到最高溫，耗電量增加 30%
+                        const temps = weatherData.filter(d => d.hours > 0).map(d => d.temp);
+                        const minTemp = Math.min(...temps);
+                        const maxTemp = Math.max(...temps);
+                        factor = 0.85 + 0.15 * (item.temp - minTemp) / (maxTemp - minTemp || 1);
+                    }
+                    
+                    const suggested = itPower * midValue * factor;
+                    input.value = suggested.toFixed(1);
+                    filledCount++;
+                }
+            }
+        });
         
-        alert(`${suggestion.desc} 建議值：${suggested.toFixed(1)} kW (約增加 ${midValue.toFixed(4)} PUE)\n已填入第一個溫度欄位，請參考調整！`);
+        // 更新加權平均值
+        updateWeightedAverages();
+        
+        alert(`${suggestion.desc} 建議值：平均增加約 ${midValue.toFixed(3)} PUE\n已填入 ${filledCount} 個溫度區間，請參考調整！`);
     }
 }
 
